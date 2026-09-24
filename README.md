@@ -16,8 +16,6 @@ $$
 
 $$
 V(S_t) = \frac{1}{n}\sum_{i=1}^{N}G_i(S_t)
-
-
 $$
 
 이를 풀어쓰면 $\alpha = 1/N$ step-size로 해석하여, monte-carlo predict 방정식이 나오지만, 현 Deep-SARSA는 Q함수를 기반으로 해석하기 때문에, 이상의 내용은 생략하겠다.
