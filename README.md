@@ -65,7 +65,8 @@ epsilon-policy 를 토대로, 확률에 따라 행해야 할 action이 아닌 �
 ### 2. model
 
 fully-connect layer로 node 30개씩 2 layer로 구현하였다.
-마지막 output은 action을 판단해야 하니, action_size로 출력하도록 하였고, 각각의 activation-function은 relu로 구현하였다.
+마지막 output은 Q-function 의 값을 판단해야 하니, action_size로 출력하도록 하였고, 각각의 activation-function은 relu로 구현하였다.
+이때 각 action에 대한 policy를 출력하는 것이 아닌, Q-function의 값을 최적의 Q-function값으로 근사시키기 위한 모델인 것을 참고해야 한다.
 
 ---
 
