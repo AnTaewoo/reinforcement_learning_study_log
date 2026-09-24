@@ -27,7 +27,7 @@ class DeepSARSAagent:
         self.action_size = action_size
 
         self.epsilon = 1
-        self.epsilon_deay = 0.999
+        self.epsilon_decay = 0.999
         self.lr = 0.001
         self.discount_factor = 0.99
         self.epsilon_min = 0.01
@@ -43,7 +43,7 @@ class DeepSARSAagent:
 
     def train_model(self, state, action, reward, next_state, next_action, done):
         if self.epsilon > self.epsilon_min:
-            self.epsilon *= self.epsilon_deay
+            self.epsilon *= self.epsilon_decay
 
         model_params = self.model.trainable_variables
         with tf.GradientTape() as tape:
