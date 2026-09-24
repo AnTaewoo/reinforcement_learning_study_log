@@ -77,12 +77,12 @@ Adam을 사용하였다. 추후 SGD, Momentum, Adagrad 등을 episode에 따른 
 
 ### Train
 
-https://github.com/AnTaewoo/reinforcement_learning_study_log/blob/deep-sarsa/train.mp4
+![demo](./train.gif)
 
 예상한대로, 맨 처음에는 epsilon = 1이므로 완전 랜덤한 상태로 움직이지만, 마지막 부분에서 target으로 이동하여, episode를 끝내어 weight를 업데이트 했다면, 다음에 그 위치로 이동했을때, policy를 토대로 바로 끝내버리는 모습을 볼 수 있다.
 
 ### Test
 
-https://github.com/AnTaewoo/reinforcement_learning_study_log/blob/deep-sarsa/test.mp4
+![demo](./test.gif)
 
 학습한 weight대로 잘 움직이며, episode 중간에 epsilon으로 인해 오른쪽으로 움직였지만, 최적의 policy대로 최소한의 움직임으로 도착하였다.
