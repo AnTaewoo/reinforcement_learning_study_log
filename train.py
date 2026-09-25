@@ -27,7 +27,7 @@ class DeepSARSAagent:
         self.action_size = action_size
 
         self.epsilon = 1
-        self.epsilon_decay = 0.999
+        self.epsilon_decay = 0.9
         self.lr = 0.001
         self.discount_factor = 0.99
         self.epsilon_min = 0.01
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     scores, episodes = [], []
 
-    EPISODE = 300
+    EPISODE = 100
     for e in range(EPISODE):
         done = False
         score = 0
@@ -93,6 +93,16 @@ if __name__ == "__main__":
             if done:
                 scores.append(score)
                 episodes.append(e)
+
+        if done:
+            print(f"episode: {e} | score: {score} | epsilon: {agent.epsilon}")
+
+            scores.append(score)
+            episodes.append(e)
+            pylab.plot(episodes, scores, "b")
+            pylab.xlabel("episode")
+            pylab.ylabel("score")
+            pylab.savefig("./save_graph/graph.png")
 
         if e % 50 == 0:
             agent.model.save_weights("save_model/model", save_format="tf")
