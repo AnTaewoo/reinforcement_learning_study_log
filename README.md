@@ -87,3 +87,16 @@ Adam을 사용하였다. 추후 SGD, Momentum, Adagrad 등을 episode에 따른 
 ![demo](./test.gif)
 
 학습한 weight대로 잘 움직이며, episode 중간에 epsilon으로 인해 오른쪽으로 움직였지만, 최적의 policy대로 최소한의 움직임으로 도착하였다.
+
+## 추가학습
+
+![demo](./train_epsilon_decay_01.gif)
+
+$\epsilon$ decay를 0.1로 설정하여, train 해보았다. 예상했던 것과 같이 환경 탐색의 경우의 수가 적어지고, 한번 지나가서 업데이트 된 Q-function의 값대로 움직이는 것을 볼 수 있다.
+
+<p align="center">
+  <img src="./save_graph/graph_epsilon_decay_99.png" width="49%" />
+  <img src="./save_graph/graph_epsilon_decay_01.png" width="49%" />
+</p>
+
+위 사진과 같이 확실히 왼쪽( $\epsilon$ decay = 0.99 )의 경우는 여러 Score를 뽑아내는 것으로 보아, 탐색을 원활히 잘 한다고 판단할 수 있는 반면, 오른쪽( $\epsilon$ decay = 0.01 )의 경우는 한번 지나간 정책대로 움직이며, 극히 드문 경우로 새로운 경로를 탐색하는 것을 볼 수 있다. 또한 loop로 인해 각 episode마다의 걸리는 시간이 엄청나게 오래걸리는 것을 알 수 있다.
