@@ -23,7 +23,7 @@ $$
 따라서 Q함수의 Bellman Optimal Equation은 아래와 같이 정의할 수 있다.
 
 $$
-q^*(s,a) = r(s,a)+\gamma P^{a}_{ss'}\max_{a'}q^*(s', a')
+q^{*}(s,a) = r(s,a)+\gamma P^{a}_{ss'}\max_{a'}q^{*}(s', a')
 $$
 
 ## Algorithm
@@ -185,16 +185,10 @@ self.sync_step = 1000 # 추후 기능 보강 예정
 
 ### Graph
 
-<div style="display: flex; gap: 5px; width: 100%">
-  <div style="display: flex; align-items: center; flex-direction: column; gap: 10px; width: 32%">
-    <img src="./save_graph/graph_m2000_d08_r0999_s500.png" alt="deque2000,decay0.8,discount0.999,start500"/>
-  </div>
-  <div style="display: flex; align-items: center; flex-direction: column; gap: 10px; width: 32%">
-    <img src="./save_graph/graph_m3000_d099_r099_s1000.png" alt="deque3000,decay099,discount0.99,start1000"/>
-  </div>
-  <div style="display: flex; align-items: center; flex-direction: column; gap: 10px; width: 32%">
-    <img src="./save_graph/graph.png" alt="deque3000,decay099,discount0.99,start1000"/>
-  </div>
-</div>
+<p>
+  <img src="./save_graph/graph_m2000_d08_r0999_s500.png" alt="deque2000,decay0.8,discount0.999,start500" width="32%" />
+  <img src="./save_graph/graph_m3000_d099_r099_s1000.png" alt="deque3000,decay099,discount0.99,start1000"  width="32%" />
+  <img src="./save_graph/graph.png" alt="deque3000,decay099,discount0.99,start1000" width="32%"/>
+</p>
 
 각각 훈련에 대한 hyper params는 img alt로 붙였다. 맨 왼쪽은 학습이 제대로 안되어, 각각 episode에 대해 score가 하락하는 모습을 볼 수 있고, 중간과 맨 오른쪽은 같은 학습을 누적 유무로 다르게 표현해 보았다. 실제로 최대점수인 500점을 episode 후반에 계속 유지하는 것으로 보아, 학습이 잘 되는 것을 확인할 수 있다.
