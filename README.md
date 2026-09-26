@@ -22,9 +22,9 @@ $$
 
 따라서 Q함수의 Bellman Optimal Equation은 아래와 같이 정의할 수 있다.
 
-$$
-q^{*}(s,a) = r(s,a)+\gamma P^{a}_{s{s'}}\max_{a'}q^{*}(s', a')
-$$
+```math
+q^{*}(s,a) = r(s,a) + \gamma \sum_{s'} P^{a}_{ss'} \max_{a'} q^{*}(s', a')
+```
 
 ## Algorithm
 
