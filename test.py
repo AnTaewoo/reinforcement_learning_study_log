@@ -3,73 +3,64 @@ import gymnasium as gym
 import pylab
 import random
 import numpy as np
+import math
 from collections import deque
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.initializers import RandomUniform
 
 
-# 상태가 입력, 큐함수가 출력인 인공신경망 생성
 class DQN(tf.keras.Model):
-    def __init__(self, action_size):
+    def __init__(self, len_a):
         super(DQN, self).__init__()
-        self.fc1 = Dense(24, activation="relu")
-        self.fc2 = Dense(24, activation="relu")
-        self.fc_out = Dense(action_size, kernel_initializer=RandomUniform(-1e-3, 1e-3))
+        self.fc1 = Dense(25, activation="relu")
+        self.fc2 = Dense(25, activation="relu")
+        self.fout = Dense(len_a)  # activation="softmax"
 
-    def call(self, x):
-        x = self.fc1(x)
+    def call(self, s):
+        x = self.fc1(s)
         x = self.fc2(x)
-        q = self.fc_out(x)
-        return q
+        return self.fout(x)
 
 
-# 카트폴 예제에서의 DQN 에이전트
-class DQNAgent:
-    def __init__(self, state_size, action_size):
-        # 상태와 행동의 크기 정의
-        self.state_size = state_size
+class DQNagent:
+    def __init__(self, s_size, action_size):
+        self.s_size = s_size
         self.action_size = action_size
-
-        # 모델과 타깃 모델 생성
         self.model = DQN(action_size)
-        self.model.load_weights("./save_model/trained/model")
+        self.model.load_weights("./save_model/model")
 
-    # 입실론 탐욕 정책으로 행동 선택
-    def get_action(self, state):
-        q_value = self.model(state)
-        return np.argmax(q_value[0])
+    def get_action(self, s):
+        q_list = self.model(s)
+        return np.argmax(q_list)
 
 
 if __name__ == "__main__":
-    # CartPole-v1 환경, 최대 타임스텝 수가 500
-    env = gym.make("CartPole-v1")
-    state_size = env.observation_space.shape[0]
-    action_size = env.action_space.n
+    env = gym.make("CartPole-v1", render_mode="human")
+    env.unwrapped.metadata["render_fps"] = 1000
+    env.unwrapped.theta_threshold_radians = math.radians(45)  # 실패 각도, 기본 12°
+    env.unwrapped.x_threshold = 2.5
+    s_size = env.observation_space.shape[0]
+    a_size = env.action_space.n
 
-    # DQN 에이전트 생성
-    agent = DQNAgent(state_size, action_size)
+    agent = DQNagent(s_size, a_size)
 
-    num_episode = 10
-    for e in range(num_episode):
+    EPISODE = 10
+    for e in range(EPISODE):
         done = False
         score = 0
-        # env 초기화
-        state = env.reset()
-        state = np.reshape(state, [1, state_size])
+        s, _ = env.reset()
+        s = np.reshape(s, [1, s_size])
 
         while not done:
             env.render()
+            a = agent.get_action(s)
+            next_s, r, terminated, truncated, _ = env.step(a)
+            done = terminated or truncated
+            next_s = np.reshape(next_s, [1, s_size])
 
-            # 현재 상태로 행동을 선택
-            action = agent.get_action(state)
-            # 선택한 행동으로 환경에서 한 타임스텝 진행
-            next_state, reward, done, info = env.step(action)
-            next_state = np.reshape(next_state, [1, state_size])
-
-            score += reward
-            state = next_state
+            score += r
+            s = next_s
 
             if done:
-                # 에피소드마다 학습 결과 출력
                 print("episode: {:3d} | score: {:.3f} ".format(e, score))

@@ -1,6 +1,6 @@
 #!/bin/bash
 DISP=:99
-OUT=train
+OUT=test
 
 # Xvfb·ffmpeg는 별도 세션(setsid) → 터미널 Ctrl+C는 python에게만 감
 setsid Xvfb $DISP -screen 0 720x480x24 -nolisten tcp &
@@ -8,7 +8,7 @@ XVFB_PID=$!
 sleep 1
 kill -0 $XVFB_PID 2>/dev/null || { echo "Xvfb 시작 실패 ($DISP 이미 사용 중?)" >&2; exit 1; }
 
-DISPLAY=$DISP setsid ffmpeg -nostdin -f x11grab -draw_mouse 0 -video_size 720x480 -framerate 25 -i $DISP \
+DISPLAY=$DISP setsid ffmpeg -draw_mouse 0 -nostdin -f x11grab -video_size 720x480 -framerate 25 -i $DISP \
   -c:v libx264 -preset ultrafast -pix_fmt yuv420p -flush_packets 1 -y $OUT.mkv &
 FFMPEG_PID=$!
 
@@ -45,5 +45,5 @@ cleanup() {
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM HUP
 
-DISPLAY=$DISP python train.py
+DISPLAY=$DISP python $OUT.py
 cleanup
