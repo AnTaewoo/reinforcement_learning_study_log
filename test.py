@@ -44,7 +44,6 @@ class A2Cagent:
 
 if __name__ == "__main__":
     env = gym.make("CartPole-v1", render_mode="human")
-    env.unwrapped.metadata["render_fps"] = 2000
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
 
@@ -53,7 +52,7 @@ if __name__ == "__main__":
     agent.model.eval()
     scores, episodes = [], []
 
-    EPISODE = 50
+    EPISODE = 10
     for e in range(EPISODE):
         state = env.reset()
         state = torch.reshape(torch.as_tensor(state[0]), [1, state_size])
