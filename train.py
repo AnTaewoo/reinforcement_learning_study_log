@@ -38,12 +38,12 @@ class A2Cagent:
 
         self.model = A2C(state_size, action_size)
 
-        self.actor_optim = optim.Adam(
+       self.actor_optim = optim.Adam(
             self.model.actor_model.parameters(), lr=self.learning_rate
         )
         self.critic_optim = optim.Adam(
             self.model.critic_model.parameters(), lr=self.learning_rate
-        )
+        ) 
 
     def get_action(self, state):
         with torch.no_grad():
@@ -95,14 +95,15 @@ if __name__ == "__main__":
 
     EPISODE = 750
     for e in range(EPISODE):
-        state = env.reset()
-        state = torch.reshape(torch.as_tensor(state[0]), [1, state_size])
+        state, _ = env.reset()
+        state = torch.as_tensor(state, dtype=torch.float32).reshape(1, state_size)
 
         score = 0
 
         done = False
         while not done:
             action = agent.get_action(state)
+
             next_state, reward, terminated, truncated, _ = env.step(action)
             next_state = torch.reshape(torch.as_tensor(next_state), [1, state_size])
 
