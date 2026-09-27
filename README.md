@@ -52,7 +52,7 @@ $$
 MSE = (R_t + \gamma \max_{a'}Q(S_{t+1},A_{t+1},\theta') - Q(S_t,A_t,\theta))^2
 $$
 
-### 3. plus. basic knowledge
+### 3. plus. basic knowledge (왜 deadly triad가 생기는가?)
 
 DQN을 하며, 여러가지 모델 형태, 그에따른 여러가지 정책기법들이 혼동스러울 수 있어, 필자가 어려웠던 부분을 따로 정리해두겠다.
 
@@ -72,7 +72,7 @@ $$
 \theta : weight\ 업데이트\ 후\ 새로운 정책,\ \theta : weight\ 업데이트\ 전\ 기존\ 정책
 $$
 
-target network는 기존 정책을 새로운 모델의 가중치에 버퍼와 같이 복사하여, target(목표)의 Q함수 값만 기존 정책 모델을 사용하여 구한다. 이 외에도 Bootstrapping을 막기 위한 방법들이 많이 존재한다.
+target network는 기존 정책을 새로운 모델의 가중치에 버퍼와 같이 복사하여, target(목표)의 Q함수 값만 기존 정책 모델을 사용하여 구한다. 이 외에도 deadly triad - ootstrapping을 막기 위한 방법들이 많이 존재한다.
 
 #### 3. On-policy vs Off-policy
 
