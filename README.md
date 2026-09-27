@@ -32,7 +32,7 @@ MC 방식은 bootstrapping 방식이 아니다. 이는 정책발전이 episode�
 
 actor-critic은 말 그대로 actor(policy network), critic(value network)로 2개의 신경망으로 정책을 발전시킨다. policy iteration에서 actor는 policy improvement, critic은 policy evaluation을 담당한다.
 
-![alt text](./actor_critic_diagram.png)
+![alt text](./assets/actor_critic_diagram.png)
 
 ### 1. actor (policy network)
 
