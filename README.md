@@ -7,3 +7,4 @@ reinforcement_learning_study_log
 | 1 | [monte-carlo-policy-gradient](https://github.com/AnTaewoo/reinforcement_learning_study_log/tree/monte-carlo-policy-gradient) | 26.09.25 |
 | 2 | [cartpole-dqn](https://github.com/AnTaewoo/reinforcement_learning_study_log/tree/cartpole-dqn) | 26.09.26 |
 | 3 | [cartpole-a2c](https://github.com/AnTaewoo/reinforcement_learning_study_log/tree/cartpole-a2c) | 26.09.27 |
+| 4 | [breakout-cnn-and-dqn](https://github.com/AnTaewoo/reinforcement_learning_study_log/tree/breakout-cnn-and-dqn) | 26.09.28 |
