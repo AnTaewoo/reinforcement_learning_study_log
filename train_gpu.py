@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
     agent = CDQNagent(state_size=4, action_size=3)
     scores, episodes = [], []
-    EPISODE = 50000
+    EPISODE = 15000
     step = 0
     score_avg = 0
     for e in range(EPISODE):

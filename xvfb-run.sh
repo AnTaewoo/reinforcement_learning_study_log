@@ -1,6 +1,6 @@
 #!/bin/bash
 DISP=:99
-OUT=test
+OUT=test_gpu
 
 # Xvfb·ffmpeg는 별도 세션(setsid) → 터미널 Ctrl+C는 python에게만 감
 setsid Xvfb $DISP -screen 0 480x320x24 -nolisten tcp &
